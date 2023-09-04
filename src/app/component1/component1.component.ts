@@ -8,9 +8,15 @@ import { Component } from '@angular/core';
 export class Component1Component {
 
   firstName: string = "Hanan";
-  age: number = 20;
-
+  age: number = 16;
+  check: boolean = true;
   changeName() {
-    this.firstName = "Muhammad";
+    if(this.check) {
+      this.firstName = "Muhammad";
+      this.check = false;
+    } else {
+      this.firstName = "Hanan";
+      this.check = true;
+    }
   }
 }

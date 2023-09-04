@@ -1,8 +1,12 @@
 <!--Interpolation-->
 <h2>{{firstName}} is working right now on Project</h2>
 <!--Property Binding-->
+
 <h1 class="centre" [textContent]="age"></h1>
-<!--Event Binding-->
-<button class="centre button" (click)="changeName()">Change Name</button>
+<!--Built in Directive-->
+<div *ngIf="age>15">
+  <!--Event Binding-->
+  <button class="centre button" (click)="changeName()">Change Name</button>
+</div>
 
 
