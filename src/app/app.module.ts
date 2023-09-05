@@ -3,16 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Component1Component } from './component1/component1.component';
+import { employeeComponent } from './employee/employee.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmployeesListComponent } from './employee/employees-list/employees-list.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    Component1Component
+    employeeComponent,
+    EmployeesListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

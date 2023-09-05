@@ -1,0 +1,29 @@
+.table {
+
+  align-content: center;
+  position: relative;
+  right: 10%;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ccc;
+  padding: 10px 25px;
+  text-align: center;
+}
+
+.employee-table th {
+  background-color: #f2f2f2;
+}
+
+.highlighted-row {
+  background-color: yellow;
+}

@@ -1,0 +1,25 @@
+<ng-container *ngIf="userRole!='User'">
+  <div class="table" *ngIf="disabled">
+    <table class="employee-table">
+
+      <tr>
+        <th>Employee Name</th>
+        <th>Employee Age</th>
+        <th>Employee Email</th>
+        <th>Employee Salary</th>
+        <th>Actions</th>
+      </tr>
+
+      <tr *ngFor="let employee of employees" [ngClass]="{ 'highlighted-row': employee === selectedEmployee }">
+        <td>{{ employee.firstName + ' ' + employee.lastName }}</td>
+        <td [ngClass]="employee.age<12 ? 'small-age':'medium-age'">{{ employee.age }}</td>
+        <td>{{ employee.Email }}</td>
+        <td>{{ employee.Salary | currency }}</td>
+        <td>
+          <button (click)="requestFocusOnEmployee(employee)" class="edit-button">Focus</button>
+
+      </tr>
+    </table>
+
+  </div>
+</ng-container>
