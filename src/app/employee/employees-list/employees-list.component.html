@@ -10,16 +10,20 @@
         <th>Actions</th>
       </tr>
 
-      <tr *ngFor="let employee of employees" [ngClass]="{ 'highlighted-row': employee === selectedEmployee }">
+      <tr [ngClass]="{ 'highlight': isEmployeeSelected(employee) }" *ngFor="let employee of employees">
         <td>{{ employee.firstName + ' ' + employee.lastName }}</td>
-        <td [ngClass]="employee.age<12 ? 'small-age':'medium-age'">{{ employee.age }}</td>
+        <td [ngClass]="employee.age < 12 ? 'small-age' : 'medium-age'">{{ employee.age }}</td>
         <td>{{ employee.Email }}</td>
         <td>{{ employee.Salary | currency }}</td>
         <td>
           <button (click)="requestFocusOnEmployee(employee)" class="edit-button">Focus</button>
-
+        </td>
       </tr>
+
+
+
     </table>
 
   </div>
 </ng-container>
+

@@ -1,18 +1,31 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Employee} from "../../Employee";
+import {EmployeesListComponent} from "./employees-list/employees-list.component";
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss']
 })
-export class employeeComponent implements OnInit{
+export class employeeComponent implements OnInit,AfterViewInit{
+  @ViewChild(EmployeesListComponent ) employeesListComponent!: EmployeesListComponent;
+  @ViewChildren(EmployeesListComponent ) employeesListComponents!: QueryList<EmployeesListComponent>;
   ngOnInit(): void {
+    // console.log(this.employeesListComponent);
     this.initializeUsers();
+
+    this.initializeEmployee()
     this.updateTime();
     setInterval(() => {
       this.updateTime();
     }, 1000);
+  }
+  ngAfterViewInit(): void {
+
+    // console.log(this.employeesListComponent);
+    this.employeesListComponents.forEach((item) => {  console.log(item); }
+    );
+
   }
 
   usersWithRoles:Map<string,string> = new Map<string,string>();
@@ -35,10 +48,14 @@ export class employeeComponent implements OnInit{
 
   receiveFocusRequest(data: Employee)
   {
-    console.log(data);
+
     this.receivedData=data;
+      console.log(JSON.stringify(this.receivedData));
+
 
   }
+
+
   initializeUsers() {
     this.usersWithRoles.set("m.hanan", "Admin");
     this.usersWithRoles.set("m.umer", "User");
@@ -65,9 +82,27 @@ export class employeeComponent implements OnInit{
     }
   }
 
+  addEmployee() {
+    let employee: Employee = {
 
+      firstName: "Muhammad",
+      lastName: "Saim",
+      age: 25,
+      Email: "saim@gmail.com",
+      Salary: 10,
+    };
+    this.TotalEmployees++;
+    this.employees=[...this.employees,employee];
+
+  }
+
+  showEmployees() {
+    this.disabled = true;
+
+
+  }
   initializeEmployee() {
-  this.disabled = true;
+
     this.employees = [{
 
       firstName: "Muhammad",
@@ -93,4 +128,7 @@ export class employeeComponent implements OnInit{
     ];
 
   }
+
+
+
 }

@@ -19,11 +19,20 @@
 <ng-container *ngIf="TotalEmployees>0">
 <div >
   <!--Event Binding-->
-  <button class="centre button" (click)="initializeEmployee()">Show Employees</button>
+  <button class="centre button" (click)="addEmployee()">Add Employee</button>
+  <button class="centre button" (click)="showEmployees()">Show Employees</button>
 </div>
 <div ><button class="centre button" (click)="hideEmployees()">Hide Employees</button></div>
 </ng-container>
   </ng-container>
 </div>
-<app-employees-list [employees]="employees" [userRole]="userRole" [disabled]="disabled" [selectedEmployee]="receivedData"></app-employees-list>
-<app-employees-list (requestEvent)="receiveFocusRequest($event)" ></app-employees-list>
+<app-employees-list
+        (requestEvent)="receiveFocusRequest($event)"
+        [employees]="employees"
+        [userRole]="userRole"
+        [disabled]="disabled"
+        [selectedEmployee]="receivedData"
+></app-employees-list>
+
+<!--<app-employees-list> </app-employees-list>-->
+

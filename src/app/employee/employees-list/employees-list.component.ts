@@ -1,28 +1,35 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 import {Employee} from "../../../Employee";
-
+import { ChangeDetectionStrategy } from '@angular/core';
+import {OnChanges } from '@angular/core';
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
-  styleUrls: ['./employees-list.component.scss']
+  styleUrls: ['./employees-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EmployeesListComponent implements OnInit{
+export class EmployeesListComponent implements OnChanges{
 
   @Input() employees: Employee[] = [];
   @Input() userRole: string = "";
   @Input() disabled: boolean = false;
-  @Output() requestEvent: EventEmitter<Employee> = new EventEmitter<Employee>();
+  @Output() requestEvent= new EventEmitter<Employee>();
   @Input() selectedEmployee!: Employee;
-  ngOnInit(): void {
-  }
+
 
   requestFocusOnEmployee(employee: Employee) {
-    console.log("requestFocusOnEmployee");
+
     this.requestEvent.emit(employee);
 
+  }
+    isEmployeeSelected(employee: Employee): boolean {
+        return this.selectedEmployee === employee;
+    }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+   console.log(changes);
+  }
 
   }
 
-
-
-}

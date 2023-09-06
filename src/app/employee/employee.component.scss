@@ -1,3 +1,7 @@
+*{
+
+  box-sizing: border-box;
+}
 .centre {
   text-align: center;
 }
@@ -74,8 +78,8 @@
 }
 
 .button {
-  margin: 20px 125px;
-  padding: 10px;
+  margin: 15px auto;
+  padding: 10px 10px;
   width: 12em;
   border-radius: 5px;
   background-color: #4CAF50;
@@ -84,14 +88,13 @@
   cursor: pointer;
   font-size: 20px;
   text-decoration: none;
-
+  display: block;
 }
-.buttons-right{
 
-  position: relative;
-  left: 17.4%;
-
-}
+//.buttons-right{
+//
+//
+//}
 
 .employee-table tr:nth-child(even) {
   background-color: #f2f2f2;

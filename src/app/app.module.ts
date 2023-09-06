@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { employeeComponent } from './employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmployeesListComponent } from './employee/employees-list/employees-list.component';
+import { ManagerComponent } from './manager/manager.component';
 
 
 
@@ -13,7 +14,8 @@ import { EmployeesListComponent } from './employee/employees-list/employees-list
   declarations: [
     AppComponent,
     employeeComponent,
-    EmployeesListComponent
+    EmployeesListComponent,
+    ManagerComponent
   ],
   imports: [
     BrowserModule,

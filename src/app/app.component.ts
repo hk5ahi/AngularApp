@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+
+import {employeeComponent} from "./employee/employee.component";
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,16 @@ import { Component } from '@angular/core';
 
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'Demo Angular Application';
   userRole: string = "User";
+
+  @ViewChild('employeeComponent',{read:ViewContainerRef}) employeeComponent!: ViewContainerRef;
+
+
+  ngAfterViewInit(): void {
+    const componentFactory = this.employeeComponent.createComponent(employeeComponent);
+    // componentFactory.instance.TotalEmployees = 33;
+  }
 }
+
