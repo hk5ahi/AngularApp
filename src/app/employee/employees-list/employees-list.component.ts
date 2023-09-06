@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges} from '@angular/core';
 import {Employee} from "../../../Employee";
 import { ChangeDetectionStrategy } from '@angular/core';
-import {OnChanges } from '@angular/core';
+
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
@@ -30,6 +30,7 @@ export class EmployeesListComponent implements OnChanges{
 
    console.log(changes);
   }
+
 
   }
 

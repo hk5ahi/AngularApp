@@ -10,7 +10,8 @@ import {employeeComponent} from "./employee/employee.component";
 })
 export class AppComponent implements AfterViewInit {
   title = 'Demo Angular Application';
-  userRole: string = "User";
+  CurrentTime: Date = new Date();
+
 
   @ViewChild('employeeComponent',{read:ViewContainerRef}) employeeComponent!: ViewContainerRef;
 

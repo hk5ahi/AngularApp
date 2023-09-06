@@ -1,13 +1,15 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Employee} from "../../Employee";
 import {EmployeesListComponent} from "./employees-list/employees-list.component";
+
+
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss']
 })
-export class employeeComponent implements OnInit,AfterViewInit{
+export class employeeComponent implements OnInit,AfterViewInit,OnDestroy{
   @ViewChild(EmployeesListComponent ) employeesListComponent!: EmployeesListComponent;
   @ViewChildren(EmployeesListComponent ) employeesListComponents!: QueryList<EmployeesListComponent>;
   ngOnInit(): void {
@@ -127,6 +129,10 @@ export class employeeComponent implements OnInit,AfterViewInit{
       }
     ];
 
+  }
+
+  ngOnDestroy(): void {
+    console.log("ngOnDestroy");
   }
 
 
