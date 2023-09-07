@@ -7,6 +7,11 @@ import { employeeComponent } from './employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmployeesListComponent } from './employee/employees-list/employees-list.component';
 import { ContainerComponent } from './container/container.component';
+import {App_Config, App_Config_Service} from "./AppConfig/appconfig.service";
+import { HttpClientModule} from "@angular/common/http";
+import {RoomComponent} from "./user/room.component";
+
+
 
 
 
@@ -17,14 +22,21 @@ import { ContainerComponent } from './container/container.component';
     employeeComponent,
     EmployeesListComponent,
     ContainerComponent,
+    RoomComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: App_Config_Service,
+      useValue: App_Config,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

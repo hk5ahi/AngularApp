@@ -1,0 +1,43 @@
+.centre {
+  text-align: center;
+}
+
+.button {
+  margin: 15px auto;
+  padding: 10px 10px;
+  width: 12em;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.table {
+
+  align-content: center;
+  position: relative;
+  right: 10%;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ccc;
+  padding: 10px 25px;
+  text-align: center;
+}
+
+.employee-table th {
+  background-color: #f2f2f2;
+}

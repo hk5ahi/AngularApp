@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren} from '@angular/core';
 import {Employee} from "../../Employee";
 import {EmployeesListComponent} from "./employees-list/employees-list.component";
-
+import {EmployeeService} from "./Services/employee.service";
 
 
 @Component({
@@ -12,7 +12,10 @@ import {EmployeesListComponent} from "./employees-list/employees-list.component"
 export class employeeComponent implements OnInit,AfterViewInit,OnDestroy{
   @ViewChild(EmployeesListComponent ) employeesListComponent!: EmployeesListComponent;
   @ViewChildren(EmployeesListComponent ) employeesListComponents!: QueryList<EmployeesListComponent>;
+
+  constructor(@SkipSelf() private employeeService:EmployeeService) { }
   ngOnInit(): void {
+
     // console.log(this.employeesListComponent);
     this.initializeUsers();
 
@@ -53,17 +56,12 @@ export class employeeComponent implements OnInit,AfterViewInit,OnDestroy{
 
     this.receivedData=data;
       console.log(JSON.stringify(this.receivedData));
-
-
   }
 
 
   initializeUsers() {
-    this.usersWithRoles.set("m.hanan", "Admin");
-    this.usersWithRoles.set("m.umer", "User");
-    this.usersWithRoles.set("m.usman", "User");
+    this.usersWithRoles=this.employeeService.getUsersData();
     this.currentUserIndex = 0;
-
     this.updateUser("m.hanan"); // Initialize with the first user
   }
 
@@ -71,7 +69,6 @@ export class employeeComponent implements OnInit,AfterViewInit,OnDestroy{
     const usersArray = Array.from(this.usersWithRoles.keys());
     this.currentUserIndex = (this.currentUserIndex + 1) % usersArray.length;
     const userName = usersArray[this.currentUserIndex];
-
     this.updateUser(userName); // Pass the current userName
   }
 
@@ -86,7 +83,6 @@ export class employeeComponent implements OnInit,AfterViewInit,OnDestroy{
 
   addEmployee() {
     let employee: Employee = {
-
       firstName: "Muhammad",
       lastName: "Saim",
       age: 25,
@@ -101,40 +97,16 @@ export class employeeComponent implements OnInit,AfterViewInit,OnDestroy{
   showEmployees() {
     this.disabled = true;
 
-
   }
+
   initializeEmployee() {
 
-    this.employees = [{
-
-      firstName: "Muhammad",
-      lastName: "Hanan",
-      age: 25,
-      Email: "mohammad@gmail.com",
-      Salary: 100
-    },
-      {
-        firstName: "Muhammad",
-        lastName: "Umer",
-        age: 22,
-        Email: "umar@gmail.com",
-       Salary: 200
-      },
-      {
-        firstName: "Muhammad",
-        lastName: "Usman",
-        age: 11,
-        Email: "usman@gmail.com",
-        Salary: 300
-      }
-    ];
-
+    this.employees =this.employeeService.getEmployees();
   }
 
   ngOnDestroy(): void {
     console.log("ngOnDestroy");
   }
-
 
 
 }
