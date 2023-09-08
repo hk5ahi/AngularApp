@@ -1,0 +1,40 @@
+.centre {
+  text-align: center;
+}
+
+.button {
+  margin: 2% auto; /* Changed from 15px to 2% */
+  padding: 1em 1em; /* Changed from 10px to 1em */
+  width: 12em;
+  border-radius: 0.3125em; /* Changed from 5px to 0.3125em */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25em; /* Changed from 20px to 1.25em */
+  text-decoration: none;
+  display: block;
+}
+
+.table {
+  align-content: center;
+  position: relative;
+  right: 10%;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2%; /* Changed from 20px to 2% */
+}
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ccc;
+  padding: 1em 2.5em; /* Changed from 10px 25px to 1em 2.5em */
+  text-align: center;
+}
+
+.employee-table th {
+  background-color: #f2f2f2;
+}

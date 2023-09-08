@@ -1,0 +1,78 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* Cover the entire screen */
+  width: 37vw;
+  background-color: #f0f0f0;
+}
+
+.login-card {
+  width: 75%; /* Cover 50% of the page width */
+  margin: 0 auto; /* Center horizontally */
+  border-radius: 1rem; /* 10px */
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 1.5rem; /* 15px */
+  text-align: center;
+}
+
+/* Style the login header */
+.login-header {
+  fa-icon {
+    font-size: 3rem;
+  }
+  h2 {
+    margin-top: 1rem;
+  }
+}
+
+.login-subtitle {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Style the login form */
+.login-form {
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-control {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem; /* 5px */
+    padding: 1rem; /* 10px */
+  }
+
+  .login-button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.5rem; /* 5px */
+    color: #fff;
+    width: 55%;
+    padding: 1rem 1.5rem; /* 10px 20px */
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .forgot-password-link {
+    display: inline-block;
+    margin-left: 1rem; /* 10px */
+  }
+}
+
+.login-footer {
+  padding: 1rem 2rem; /* 10px 20px */
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
