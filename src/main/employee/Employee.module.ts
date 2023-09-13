@@ -10,7 +10,7 @@ const employeeRoutes: Routes = [
     pathMatch: 'full',
   },
   { path: 'employee', component: EmployeeComponent },
-  { path: 'rooms', component: RoomComponent },
+  { path: 'room', component: RoomComponent },
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 <div class="login-container">
   <div class="login-card">
     <div class="login-header">
-      <fa-icon [icon]="faLock" class="fa-3x"></fa-icon>
+      <fa-icon [icon]="lockIcon" class="fa-3x"></fa-icon>
       <h2>Welcome</h2>
     </div>
     <p class="login-subtitle">Please enter your login details</p>
@@ -29,6 +29,10 @@
       </div>
       <button type="submit" class="login-button">Login</button>
     </form>
+
+
+    <div class="login-error" *ngIf="loginError">{{ loginError }}</div>
+
     <div class="login-footer">
       <small><a routerLink="/forgot-password">Forgot Password</a></small>
     </div>

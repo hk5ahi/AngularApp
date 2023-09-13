@@ -8,7 +8,7 @@
 <!-- ngClass -->
 <div>
   <p class="left-bottom">{{ contentVariable }}</p>
-  <p [ngClass]="TotalEmployees < 15 ? 'age-label small-age' : 'age-label medium-age'" class="left-bottom-number" [textContent]="TotalEmployees"></p>
+  <p [ngClass]="totalEmployees < 15 ? 'age-label small-age' : 'age-label medium-age'" class="left-bottom-number" [textContent]="totalEmployees"></p>
 </div>
 
 <!-- Built-in Directive -->
@@ -18,7 +18,7 @@
     <button class="button" (click)="changeUserAndRole()">Change User & Role</button>
   </div>
   <ng-container *ngIf="userRole !== 'User'">
-    <ng-container *ngIf="TotalEmployees > 0">
+    <ng-container *ngIf="totalEmployees > 0">
       <div>
         <!-- Event Binding -->
         <button class="centre button" (click)="addEmployee()">Add Employee</button>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { faLock as lockedIcon } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,5 +7,5 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
-  faLock = faLock;
+  lockIcon = lockedIcon; // Rename the variable for clarity
 }

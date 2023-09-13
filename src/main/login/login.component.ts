@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { Router } from '@angular/router';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { faLock as lockedIcon } from '@fortawesome/free-solid-svg-icons';
+import { routePathDashboard } from '../Constants';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +12,18 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  loginError: string = '';
+  lockIcon = lockedIcon;
 
   constructor(private authService: AuthGuardService, private router: Router) {}
 
   login(): void {
     if (this.authService.login(this.username, this.password)) {
-      // Authentication successful, navigate to the dashboard
-      this.router.navigate(['/dashboard']); // You can choose to navigate to 'dashboard/home' based on your preference
+      // Login successful, navigate to the dashboard
+      this.router.navigate([routePathDashboard]);
     } else {
       // Authentication failed, display an error message
-      alert('Authentication failed. Please check your credentials.');
+      this.loginError = 'Authentication failed. Please check your credentials.';
     }
   }
-
-  // Define the faLock icon
-  faLock = faLock;
 }
