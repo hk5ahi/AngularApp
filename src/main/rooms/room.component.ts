@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Rooms } from '../customDataTypes/Rooms';
+import { Room } from '../customDataTypes/Room';
 import { RoomsService } from './service/rooms.service';
 
 @Component({
@@ -9,13 +9,13 @@ import { RoomsService } from './service/rooms.service';
 })
 export class RoomComponent {
 
-  rooms: Rooms[] = [];
+  rooms: Room[] = [];
   disabled: boolean = false;
 
   constructor(private roomService: RoomsService) { }
 
-  showRoomsFromAPI() {
-    this.roomService.getRooms().subscribe((data: Rooms[]) => {
+  showRooms() {
+    this.roomService.getRooms().subscribe((data: Room[]) => {
       this.rooms = data;
     });
 
@@ -26,7 +26,7 @@ export class RoomComponent {
     this.roomService.addRoom();
   }
 
-  hideRoomsFromAPI() {
+  hideRooms() {
     this.rooms = [];
     this.disabled = false;
   }

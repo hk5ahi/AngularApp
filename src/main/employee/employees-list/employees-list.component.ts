@@ -12,8 +12,9 @@ export class EmployeesListComponent {
   @Input() employees: Employee[] = [];
   @Input() userRole: string = '';
   @Input() disabled: boolean = false;
-  @Output() requestEvent = new EventEmitter<Employee>();
   @Input() selectedEmployee!: Employee;
+  @Output() requestEvent = new EventEmitter<Employee>();
+
 
   requestFocusOnEmployee(employee: Employee) {
     this.requestEvent.emit(employee);

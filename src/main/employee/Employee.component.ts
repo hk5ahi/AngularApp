@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Employee } from '../customDataTypes/Employee';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { EmployeeService } from './services/employee.service';
@@ -6,13 +6,21 @@ import { EmployeeService } from './services/employee.service';
 @Component({
   selector: 'app-employee',
   templateUrl: './Employee.component.html',
-  styleUrls: ['./Employee.component.scss']
+  styleUrls: ['./Employee.component.scss'],
 })
 export class EmployeeComponent implements OnInit {
   @ViewChild(EmployeesListComponent) employeesListComponent!: EmployeesListComponent;
-  @ViewChildren(EmployeesListComponent) employeesListComponents!: QueryList<EmployeesListComponent>;
+  currentUserIndex = 0;
+  userName = '';
+  userRole = '';
+  currentTime = new Date();
+  employees: Employee[] = [];
+  disabled = false;
+  totalEmployees = 3;
+  receivedData!: Employee;
+  contentVariable = 'Total Employees:';
 
-  constructor(@SkipSelf() private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
     this.initializeUsers();
@@ -22,17 +30,6 @@ export class EmployeeComponent implements OnInit {
       this.updateTime();
     }, 1000);
   }
-
-  usersWithRoles: Map<string, string> = new Map<string, string>();
-  currentUserIndex: number = 0;
-  userName: string = '';
-  userRole: string = '';
-  currentTime: Date = new Date();
-  employees: Employee[] = [];
-  disabled: boolean = false;
-  TotalEmployees: number = 3;
-  receivedData!: Employee;
-  contentVariable = 'Total Employees:';
 
   private updateTime() {
     this.currentTime = new Date();
@@ -47,17 +44,24 @@ export class EmployeeComponent implements OnInit {
   }
 
   initializeUsers() {
-    this.usersWithRoles = this.employeeService.getUsersData();
-    this.currentUserIndex = 0;
-    this.updateUser('m.hanan'); // Initialize with the first user
+    this.employeeService.getUsersData().subscribe((data) => {
+      this.usersWithRoles = data;
+      this.currentUserIndex = 0;
+      this.updateUser('m.hanan'); // Initialize with the first user
+    });
   }
 
   changeUserAndRole() {
-    const usersArray = Array.from(this.usersWithRoles.keys());
-    this.currentUserIndex = (this.currentUserIndex + 1) % usersArray.length;
-    const userName = usersArray[this.currentUserIndex];
-    this.updateUser(userName); // Pass the current userName
+    this.employeeService.getUsersData().subscribe((data) => {
+      this.usersWithRoles = data;
+      const usersArray = Array.from(this.usersWithRoles.keys());
+      this.currentUserIndex = (this.currentUserIndex + 1) % usersArray.length;
+      const userName = usersArray[this.currentUserIndex];
+      this.updateUser(userName); // Pass the current userName
+    });
   }
+
+  usersWithRoles: Map<string, string> = new Map<string, string>();
 
   private updateUser(userName: string) {
     const userRole = this.usersWithRoles.get(userName);
@@ -68,22 +72,22 @@ export class EmployeeComponent implements OnInit {
   }
 
   addEmployee() {
-    let employee: Employee = {
-      firstName: 'Muhammad',
-      lastName: 'Saim',
-      age: 25,
-      Email: 'saim@gmail.com',
-      Salary: 10,
-    };
-    this.TotalEmployees++;
-    this.employees = [...this.employees, employee];
+    this.totalEmployees++;
+    this.employeeService.addEmployee().subscribe((data) => {
+      this.employees = [...this.employees, data];
+    });
   }
 
   showEmployees() {
+    this.employeeService.getEmployees().subscribe((data) => {
+      this.employees = data;
+    });
     this.disabled = true;
   }
 
   initializeEmployee() {
-    this.employees = this.employeeService.getEmployees();
+    this.employeeService.getEmployees().subscribe((data) => {
+      this.employees = data;
+    });
   }
 }

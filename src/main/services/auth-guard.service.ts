@@ -1,41 +1,33 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import {Password, routePathLogin, UserName} from '../Constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuardService implements CanActivate {
-  private readonly username = 'm.hanan';
-  private readonly password = '121212';
+  private readonly username = UserName;
+  private readonly password = Password;
 
   constructor(private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.isAuthenticated()) {
       // Authentication successful, allow access to the route
       return true;
-    } else {
-      // Redirect to the login page and save the intended URL for later redirection
-      this.router.navigate(['/login'], {
-        queryParams: { returnUrl: state.url },
-      });
-      // Authentication failed, prevent access to the route
-      return false;
     }
+
+
+    this.router.navigate([routePathLogin], {
+      queryParams: { returnUrl: state.url },
+    });
+
+    return false;
   }
 
   login(username: string, password: string): boolean {
     // Simulate authentication with hardcoded credentials
-    if (username === this.username && password === this.password) {
-
+    if (this.areCredentialsValid(username, password)) {
       localStorage.setItem('authenticated', 'true');
       // Authentication successful
       return true;
@@ -45,7 +37,11 @@ export class AuthGuardService implements CanActivate {
   }
 
   isAuthenticated(): boolean {
-
     return localStorage.getItem('authenticated') === 'true';
+  }
+
+  private areCredentialsValid(username: string, password: string): boolean {
+
+    return username === this.username && password === this.password;
   }
 }

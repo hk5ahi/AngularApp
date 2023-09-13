@@ -1,44 +1,45 @@
 import { Injectable } from '@angular/core';
-import { Employee } from '../../customDataTypes/Employee';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {Employee} from "../../customDataTypes/Employee";
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeService {
-  usersData: Map<string, string> = new Map<string, string>();
-  employees: Employee[] = [
-    {
-      firstName: 'Muhammad',
-      lastName: 'Hanan',
-      age: 25,
-      Email: 'mohammad@gmail.com',
-      Salary: 100,
-    },
-    {
-      firstName: 'Muhammad',
-      lastName: 'Umer',
-      age: 22,
-      Email: 'umar@gmail.com',
-      Salary: 200,
-    },
-    {
-      firstName: 'Muhammad',
-      lastName: 'Usman',
-      age: 11,
-      Email: 'usman@gmail.com',
-      Salary: 300,
-    },
-  ];
+  private endpoint = 'https://6501b693736d26322f5c2b0d.mockapi.io/employee';
+  private employees: Employee[] = [];
 
-  getUsersData(): Map<string, string> {
-    this.usersData.set('m.hanan', 'Admin');
-    this.usersData.set('m.umer', 'User');
-    this.usersData.set('m.usman', 'User');
+  constructor(private http: HttpClient) {}
 
-    return this.usersData;
+  getUsersData(): Observable<Map<string, string>> {
+    return this.http.get<any[]>(`${this.endpoint}/usersData`).pipe(
+      map((data: any[]) => {
+        const usersDataMap = new Map<string, string>();
+        data.forEach(item => {
+          usersDataMap.set(item.username, item.role);
+        });
+        return usersDataMap;
+      })
+    );
   }
 
-  getEmployees(): Employee[] {
-    return this.employees;
+  addEmployee(): Observable<Employee> {
+    return this.http.post<Employee>(`${this.endpoint}/employee`, {}).pipe(
+      map((data: Employee) => {
+        this.employees = [...this.employees, data];
+        return data;
+      })
+    );
+  }
+
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.endpoint}/employee`).pipe(
+      map((data: Employee[]) => {
+        this.employees = data;
+        return data;
+      })
+    );
   }
 }
